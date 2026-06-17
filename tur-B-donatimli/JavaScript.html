@@ -176,7 +176,17 @@ function drawLineSummary(pareto) {
       datasets: [{ label: 'Tüketim (kWh)', data: pareto.values,
                    backgroundColor: C.tertiary, borderRadius: 6 }]
     },
-    options: baseOpts({ indexAxis: 'y', plugins: { legend: { display: false } } })
+    options: baseOpts({
+      indexAxis: 'y',
+      plugins: { legend: { display: false } },
+      // Yatay sütunda DEĞER ekseni x, KATEGORİ ekseni y olur.
+      // Sayı formatlayıcı yalnızca değer eksenine (x) uygulanmalı.
+      scales: {
+        x: { ticks: { color: C.muted, font: { family: 'Inter' },
+              callback: function (v) { return nf(v, 0); } }, grid: { color: '#eef1f7' } },
+        y: { ticks: { color: C.secondary, font: { family: 'Inter' } }, grid: { display: false } }
+      }
+    })
   });
 }
 

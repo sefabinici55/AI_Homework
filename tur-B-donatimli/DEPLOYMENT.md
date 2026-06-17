@@ -43,7 +43,7 @@ npm install -g @google/clasp
 clasp login
 
 # 2. Bu klasörde yeni proje oluştur (webapp tipi)
-cd enerji-panosu
+cd tur-B-donatimli
 clasp create --type webapp --title "S6 Enerji Panosu"
 
 # 3. Dosyaları yükle (Code.gs + *.html otomatik push edilir)
