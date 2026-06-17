@@ -1,0 +1,297 @@
+<script>
+/* =====================================================================
+   S6 ENERJİ PANOSU — Frontend Mantığı (JavaScript.html)
+   - Veri: google.script.run ile Code.gs'ten canlı çekilir.
+   - Grafikler: Chart.js
+   - Sayı biçimi: TR (1.250,50) - kalici-talimat.md md.1
+   ===================================================================== */
+
+// renk.md paleti
+var C = {
+  primary:   '#82E600',
+  secondary: '#1D2433',
+  tertiary:  '#16445F',
+  neutral:   '#F1F3F9',
+  muted:     '#6b7585',
+  danger:    '#e53935'
+};
+
+var charts = {};      // Chart.js örnekleri
+var tableRows = [];   // E4 tablo verisi
+var sortState = { key: null, dir: 1 };
+
+// ---- TR sayı biçimlendirme ----
+function nf(n, dec) {
+  if (n === null || n === undefined || isNaN(n)) return '–';
+  return Number(n).toLocaleString('tr-TR', {
+    minimumFractionDigits: dec || 0,
+    maximumFractionDigits: dec === undefined ? 2 : dec
+  });
+}
+
+// ---- Durum (loading / empty / error) gösterimi ----
+function setState(text, isError) {
+  var st = document.getElementById('state');
+  var screens = document.getElementById('screens');
+  if (text === null) { st.style.display = 'none'; screens.hidden = false; return; }
+  st.style.display = 'flex';
+  screens.hidden = true;
+  st.classList.toggle('state--error', !!isError);
+  document.getElementById('stateText').textContent = text;
+}
+
+// ---- Başlangıç ----
+document.addEventListener('DOMContentLoaded', function () {
+  initTabs();
+  loadData();
+});
+
+function loadData() {
+  setState('Veriler Google Sheets\'ten yükleniyor…', false);
+  // İki çağrıyı sırayla yap: önce özet, sonra detay tablo.
+  google.script.run
+    .withSuccessHandler(function (summary) {
+      if (!summary || !summary.kpis || summary.kpis.hatSayisi === 0) {
+        setState('Veri bulunamadı. Lütfen kaynak tabloyu kontrol edin.', true);
+        return;
+      }
+      renderSummary(summary);
+      google.script.run
+        .withSuccessHandler(function (data) {
+          tableRows = (data && data.rows) || [];
+          renderTable(tableRows);
+          setState(null);
+        })
+        .withFailureHandler(onError)
+        .getSheetData();
+    })
+    .withFailureHandler(onError)
+    .getKpiSummary();
+}
+
+function onError(err) {
+  setState('Hata: ' + (err && err.message ? err.message : err), true);
+}
+
+// ---- Sekme (ekran) geçişleri E1-E4 ----
+function initTabs() {
+  var tabs = document.querySelectorAll('.tab');
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      tabs.forEach(function (t) { t.classList.remove('tab--active'); });
+      tab.classList.add('tab--active');
+      document.querySelectorAll('.screen').forEach(function (s) {
+        s.classList.remove('screen--active');
+      });
+      document.getElementById(tab.dataset.screen).classList.add('screen--active');
+      // Görünür hale gelen grafiklerin yeniden boyutlanması için.
+      Object.keys(charts).forEach(function (k) { charts[k].resize(); });
+    });
+  });
+}
+
+// ---- Özet: KPI + E1/E2/E3 grafikleri ----
+function renderSummary(s) {
+  var k = s.kpis;
+  document.getElementById('generatedAt').textContent = 'Güncellenme: ' + s.generatedAt;
+
+  document.getElementById('kpiTuketim').textContent = nf(k.toplamTuketim);
+  document.getElementById('kpiCo2').textContent     = nf(k.toplamCo2);
+  document.getElementById('kpiBirim').textContent   = nf(k.birimBasina, 2);
+  document.getElementById('kpiUretim').textContent  = nf(k.toplamUretim, 0);
+
+  // Hedef sapma: + ise hedef aşıldı (kötü), - ise hedefin altında (iyi)
+  var sapmaEl = document.getElementById('kpiSapma');
+  var card = document.getElementById('kpiSapmaCard');
+  sapmaEl.textContent = (k.hedefSapma > 0 ? '+' : '') + nf(k.hedefSapma, 2);
+  card.classList.toggle('kpi--over', k.hedefSapma > 0);
+  card.classList.toggle('kpi--under', k.hedefSapma <= 0);
+
+  drawEnergyMix(s.energyMix);   // E1 halka
+  drawLineSummary(s.pareto);    // E1 özet sütun
+  drawTrend(s.trend);           // E2 çizgi
+  drawPareto(s.pareto);         // E3 pareto
+}
+
+// ---- Chart.js ortak ayarlar ----
+function baseOpts(extra) {
+  var o = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { labels: { color: C.secondary, font: { family: 'Inter' } } },
+      tooltip: {
+        callbacks: {
+          label: function (ctx) {
+            var v = ctx.parsed.y !== undefined ? ctx.parsed.y : ctx.parsed;
+            return ctx.dataset.label + ': ' + nf(v, 2);
+          }
+        }
+      }
+    },
+    scales: {
+      x: { ticks: { color: C.muted, font: { family: 'Inter' } }, grid: { display: false } },
+      y: { ticks: { color: C.muted, font: { family: 'Inter' },
+            callback: function (v) { return nf(v, 0); } },
+           grid: { color: '#eef1f7' } }
+    }
+  };
+  return Object.assign(o, extra || {});
+}
+
+function destroy(id) { if (charts[id]) { charts[id].destroy(); delete charts[id]; } }
+
+// E1: Enerji tipi dağılımı (halka)
+function drawEnergyMix(mix) {
+  destroy('mix');
+  charts.mix = new Chart(document.getElementById('chartEnergyMix'), {
+    type: 'doughnut',
+    data: {
+      labels: mix.labels,
+      datasets: [{
+        data: mix.values,
+        backgroundColor: [C.primary, C.tertiary, C.secondary, C.muted, '#9bd64a'],
+        borderWidth: 2, borderColor: '#fff'
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '60%',
+      plugins: {
+        legend: { position: 'bottom', labels: { color: C.secondary, font: { family: 'Inter' } } },
+        tooltip: { callbacks: { label: function (ctx) {
+          return ctx.label + ': ' + nf(ctx.parsed, 2) + ' kWh';
+        } } }
+      }
+    }
+  });
+}
+
+// E1: Hat bazında tüketim özeti (yatay sütun)
+function drawLineSummary(pareto) {
+  destroy('lineSum');
+  charts.lineSum = new Chart(document.getElementById('chartLineSummary'), {
+    type: 'bar',
+    data: {
+      labels: pareto.labels,
+      datasets: [{ label: 'Tüketim (kWh)', data: pareto.values,
+                   backgroundColor: C.tertiary, borderRadius: 6 }]
+    },
+    options: baseOpts({ indexAxis: 'y', plugins: { legend: { display: false } } })
+  });
+}
+
+// E2: Günlük trend, enerji tipine göre (çoklu çizgi)
+function drawTrend(trend) {
+  destroy('trend');
+  var palette = [C.primary, C.tertiary, C.secondary, C.muted];
+  var datasets = trend.types.map(function (t, i) {
+    return {
+      label: t,
+      data: trend.series[t],
+      borderColor: palette[i % palette.length],
+      backgroundColor: palette[i % palette.length] + '33',
+      fill: false, tension: 0.3, pointRadius: 2, borderWidth: 2
+    };
+  });
+  charts.trend = new Chart(document.getElementById('chartTrend'), {
+    type: 'line',
+    data: { labels: trend.labels, datasets: datasets },
+    options: baseOpts()
+  });
+}
+
+// E3: Pareto — sütun (tüketim) + kümülatif % çizgisi
+function drawPareto(pareto) {
+  destroy('pareto');
+  charts.pareto = new Chart(document.getElementById('chartPareto'), {
+    type: 'bar',
+    data: {
+      labels: pareto.labels,
+      datasets: [
+        { type: 'bar', label: 'Tüketim (kWh)', data: pareto.values,
+          backgroundColor: C.primary, borderRadius: 6, order: 2, yAxisID: 'y' },
+        { type: 'line', label: 'Kümülatif %', data: pareto.cumulative,
+          borderColor: C.tertiary, backgroundColor: C.tertiary,
+          tension: 0.2, pointRadius: 3, borderWidth: 2, order: 1, yAxisID: 'y1' }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: C.secondary, font: { family: 'Inter' } } },
+        tooltip: { callbacks: { label: function (ctx) {
+          var suffix = ctx.dataset.yAxisID === 'y1' ? ' %' : ' kWh';
+          return ctx.dataset.label + ': ' + nf(ctx.parsed.y, 2) + suffix;
+        } } }
+      },
+      scales: {
+        x: { ticks: { color: C.muted }, grid: { display: false } },
+        y: { position: 'left', ticks: { color: C.muted, callback: function (v) { return nf(v, 0); } },
+             grid: { color: '#eef1f7' }, title: { display: true, text: 'kWh', color: C.muted } },
+        y1: { position: 'right', min: 0, max: 100, grid: { drawOnChartArea: false },
+              ticks: { color: C.tertiary, callback: function (v) { return v + '%'; } },
+              title: { display: true, text: 'Kümülatif %', color: C.tertiary } }
+      }
+    }
+  });
+}
+
+// ---- E4: Detay tablosu (render + arama + sıralama) ----
+function renderTable(rows) {
+  var body = document.getElementById('tableBody');
+  if (!rows.length) {
+    body.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:24px;color:#6b7585;">Veri bulunamadı</td></tr>';
+    return;
+  }
+  var html = rows.map(function (r) {
+    return '<tr>' +
+      '<td>' + r.tarih + '</td>' +
+      '<td>' + r.vardiya + '</td>' +
+      '<td>' + r.hat + '</td>' +
+      '<td>' + r.enerjiTipi + '</td>' +
+      '<td class="num">' + nf(r.tuketim, 2) + '</td>' +
+      '<td class="num">' + nf(r.uretim, 0) + '</td>' +
+      '<td class="num">' + nf(r.birimBasina, 3) + '</td>' +
+      '<td class="num">' + nf(r.co2, 2) + '</td>' +
+    '</tr>';
+  }).join('');
+  body.innerHTML = html;
+}
+
+// Arama
+document.addEventListener('input', function (e) {
+  if (e.target.id !== 'tableSearch') return;
+  var q = e.target.value.toLowerCase().trim();
+  var filtered = tableRows.filter(function (r) {
+    return (r.hat + ' ' + r.vardiya + ' ' + r.enerjiTipi + ' ' + r.tarih)
+      .toLowerCase().indexOf(q) !== -1;
+  });
+  renderTable(filtered);
+});
+
+// Sıralama (başlığa tıkla)
+document.addEventListener('click', function (e) {
+  var th = e.target.closest('#dataTable thead th');
+  if (!th) return;
+  var key = th.dataset.key;
+  sortState.dir = (sortState.key === key) ? -sortState.dir : 1;
+  sortState.key = key;
+
+  document.querySelectorAll('#dataTable thead th').forEach(function (h) {
+    h.classList.remove('sort-asc', 'sort-desc');
+  });
+  th.classList.add(sortState.dir === 1 ? 'sort-asc' : 'sort-desc');
+
+  var q = (document.getElementById('tableSearch').value || '').toLowerCase().trim();
+  var rows = tableRows.filter(function (r) {
+    return (r.hat + ' ' + r.vardiya + ' ' + r.enerjiTipi + ' ' + r.tarih)
+      .toLowerCase().indexOf(q) !== -1;
+  });
+  rows.sort(function (a, b) {
+    var x = a[key], y = b[key];
+    if (typeof x === 'number' && typeof y === 'number') return (x - y) * sortState.dir;
+    return String(x).localeCompare(String(y), 'tr') * sortState.dir;
+  });
+  renderTable(rows);
+});
+</script>

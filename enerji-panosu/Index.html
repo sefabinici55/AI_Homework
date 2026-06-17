@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Enerji & Sürdürülebilirlik Panosu</title>
+
+  <!-- Tipografi: Montserrat (başlık) + Inter (gövde) - renk.md -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Grafik kütüphanesi -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- KURAL (kalici-talimat.md md.3): Index.html içinde <style>/<script> BLOĞU YOK.
+       Tüm CSS Stylesheet.html, tüm JS JavaScript.html dosyasından dahil edilir. -->
+  <?!= include('Stylesheet'); ?>
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="brand">
+        <span class="brand__mark">⚡</span>
+        <div>
+          <h1 class="brand__title">Enerji &amp; Sürdürülebilirlik Panosu</h1>
+          <p class="brand__sub">VALEO · Tesis Yönetimi · S6</p>
+        </div>
+      </div>
+      <div class="header__meta" id="generatedAt">Güncelleniyor…</div>
+    </header>
+
+    <!-- EKRAN GEÇİŞ SEKMELERİ (E1-E4) -->
+    <nav class="tabs" role="tablist">
+      <button class="tab tab--active" data-screen="e1" role="tab">Özet &amp; KPI</button>
+      <button class="tab" data-screen="e2" role="tab">Tüketim Trendi</button>
+      <button class="tab" data-screen="e3" role="tab">Hat Bazlı Kırılım</button>
+      <button class="tab" data-screen="e4" role="tab">Detay Tablosu</button>
+    </nav>
+
+    <!-- GENEL DURUM (Loading / Empty / Error) -->
+    <div class="state" id="state">
+      <div class="state__spinner"></div>
+      <p id="stateText">Veriler Google Sheets'ten yükleniyor…</p>
+    </div>
+
+    <main class="screens" id="screens" hidden>
+
+      <!-- E1: ÖZET / KPI -->
+      <section class="screen screen--active" id="e1">
+        <div class="kpi-grid">
+          <article class="kpi kpi--primary">
+            <p class="kpi__label">Toplam Tüketim</p>
+            <p class="kpi__value"><span id="kpiTuketim">–</span><span class="kpi__unit">kWh</span></p>
+          </article>
+          <article class="kpi">
+            <p class="kpi__label">Toplam CO₂ Salınımı</p>
+            <p class="kpi__value"><span id="kpiCo2">–</span><span class="kpi__unit">kg</span></p>
+          </article>
+          <article class="kpi">
+            <p class="kpi__label">Birim Başına Tüketim</p>
+            <p class="kpi__value"><span id="kpiBirim">–</span><span class="kpi__unit">kWh/adet</span></p>
+          </article>
+          <article class="kpi" id="kpiSapmaCard">
+            <p class="kpi__label">Hedef Sapma</p>
+            <p class="kpi__value"><span id="kpiSapma">–</span><span class="kpi__unit">%</span></p>
+          </article>
+          <article class="kpi">
+            <p class="kpi__label">Toplam Üretim</p>
+            <p class="kpi__value"><span id="kpiUretim">–</span><span class="kpi__unit">adet</span></p>
+          </article>
+        </div>
+
+        <div class="panel-row">
+          <div class="panel">
+            <h2 class="panel__title">Enerji Tipi Dağılımı</h2>
+            <div class="panel__canvas"><canvas id="chartEnergyMix"></canvas></div>
+          </div>
+          <div class="panel panel--wide">
+            <h2 class="panel__title">Hat Bazında Tüketim (Özet)</h2>
+            <div class="panel__canvas"><canvas id="chartLineSummary"></canvas></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- E2: TREND (Çizgi) -->
+      <section class="screen" id="e2">
+        <div class="panel panel--full">
+          <h2 class="panel__title">Günlük Tüketim Trendi (Enerji Tipine Göre)</h2>
+          <div class="panel__canvas panel__canvas--tall"><canvas id="chartTrend"></canvas></div>
+        </div>
+      </section>
+
+      <!-- E3: PARETO (Sütun + Kümülatif %) -->
+      <section class="screen" id="e3">
+        <div class="panel panel--full">
+          <h2 class="panel__title">Hat Bazlı Kırılım — Pareto Analizi</h2>
+          <div class="panel__canvas panel__canvas--tall"><canvas id="chartPareto"></canvas></div>
+        </div>
+      </section>
+
+      <!-- E4: DETAY TABLOSU (Sıralanabilir) -->
+      <section class="screen" id="e4">
+        <div class="panel panel--full">
+          <div class="panel__head">
+            <h2 class="panel__title">Detay Veri Tablosu</h2>
+            <input type="search" id="tableSearch" class="search" placeholder="🔍 Ara (hat, vardiya, enerji tipi)…">
+          </div>
+          <div class="table-wrap">
+            <table class="data-table" id="dataTable">
+              <thead>
+                <tr>
+                  <th data-key="tarih">Tarih</th>
+                  <th data-key="vardiya">Vardiya</th>
+                  <th data-key="hat">Hat</th>
+                  <th data-key="enerjiTipi">Enerji Tipi</th>
+                  <th data-key="tuketim" class="num">Tüketim (kWh)</th>
+                  <th data-key="uretim" class="num">Üretim (adet)</th>
+                  <th data-key="birimBasina" class="num">kWh/adet</th>
+                  <th data-key="co2" class="num">CO₂ (kg)</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">Veriler Google Sheets'ten canlı çekilmektedir · S6 Enerji &amp; Sürdürülebilirlik</footer>
+  </div>
+
+  <!-- KURAL: Tüm JS ayrı dosyada -->
+  <?!= include('JavaScript'); ?>
+</body>
+</html>
