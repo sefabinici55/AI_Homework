@@ -1,0 +1,229 @@
+Tarih,Vardiya,Hat,Enerji Tipi,Tüketim (kWh),Üretim Adedi,Hedef kWh/birim,CO2 Faktörü (kg CO2/kWh)
+2026-06-01,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,4088.95,4083,0.85,0.443
+2026-06-01,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,2985.48,1359,2.1,0.443
+2026-06-01,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,4644.52,871,4.5,0.443
+2026-06-01,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,5257.18,348,12.0,0.202
+2026-06-01,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,3813.67,4112,0.85,0.443
+2026-06-01,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,2803.97,1275,2.1,0.443
+2026-06-01,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,4393.54,854,4.5,0.443
+2026-06-01,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,4665.67,321,12.0,0.202
+2026-06-01,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,3917.83,3883,0.85,0.443
+2026-06-01,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,3758.98,1409,2.1,0.443
+2026-06-01,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,4433.8,807,4.5,0.443
+2026-06-01,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,5020.84,353,12.0,0.202
+2026-06-02,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,3565.19,3785,0.85,0.443
+2026-06-02,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,2804.38,1295,2.1,0.443
+2026-06-02,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,3943.1,754,4.5,0.443
+2026-06-02,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,5263.03,345,12.0,0.202
+2026-06-02,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,3736.84,4178,0.85,0.443
+2026-06-02,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,3226.01,1371,2.1,0.443
+2026-06-02,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,3947.94,763,4.5,0.443
+2026-06-02,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,5342.49,332,12.0,0.202
+2026-06-02,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,3157.98,3771,0.85,0.443
+2026-06-02,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,3601.76,1501,2.1,0.443
+2026-06-02,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,3970.8,730,4.5,0.443
+2026-06-02,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,5187.82,314,12.0,0.202
+2026-06-03,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,3839.99,4266,0.85,0.443
+2026-06-03,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,3628.27,1367,2.1,0.443
+2026-06-03,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,3918.29,760,4.5,0.443
+2026-06-03,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,5294.73,342,12.0,0.202
+2026-06-03,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,3801.67,3840,0.85,0.443
+2026-06-03,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,3329.41,1279,2.1,0.443
+2026-06-03,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,4307.82,794,4.5,0.443
+2026-06-03,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,5526.29,346,12.0,0.202
+2026-06-03,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,3311.51,3892,0.85,0.443
+2026-06-03,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,3112.88,1281,2.1,0.443
+2026-06-03,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,4377.71,828,4.5,0.443
+2026-06-03,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,5240.16,369,12.0,0.202
+2026-06-04,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,3968.79,4163,0.85,0.443
+2026-06-04,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,3382.01,1275,2.1,0.443
+2026-06-04,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,4936.75,885,4.5,0.443
+2026-06-04,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,5424.95,352,12.0,0.202
+2026-06-04,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,3311.47,3897,0.85,0.443
+2026-06-04,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,3368.74,1271,2.1,0.443
+2026-06-04,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,4181.53,782,4.5,0.443
+2026-06-04,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,4946.43,356,12.0,0.202
+2026-06-04,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,4090.5,4262,0.85,0.443
+2026-06-04,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,3462.73,1399,2.1,0.443
+2026-06-04,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,4224.36,775,4.5,0.443
+2026-06-04,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,5599.07,339,12.0,0.202
+2026-06-05,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,4072.7,4078,0.85,0.443
+2026-06-05,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,3123.68,1262,2.1,0.443
+2026-06-05,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,4303.38,823,4.5,0.443
+2026-06-05,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,4786.05,346,12.0,0.202
+2026-06-05,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,4314.55,4349,0.85,0.443
+2026-06-05,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,3199.13,1361,2.1,0.443
+2026-06-05,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,4065.59,836,4.5,0.443
+2026-06-05,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,5425.32,377,12.0,0.202
+2026-06-05,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,3476.0,3949,0.85,0.443
+2026-06-05,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,3777.65,1434,2.1,0.443
+2026-06-05,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,4255.27,850,4.5,0.443
+2026-06-05,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,5531.25,337,12.0,0.202
+2026-06-06,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,3901.38,4224,0.85,0.443
+2026-06-06,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,3201.59,1319,2.1,0.443
+2026-06-06,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,4222.61,815,4.5,0.443
+2026-06-06,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,4749.2,352,12.0,0.202
+2026-06-06,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,3543.44,3759,0.85,0.443
+2026-06-06,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,3166.73,1295,2.1,0.443
+2026-06-06,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,4620.94,839,4.5,0.443
+2026-06-06,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,5356.76,344,12.0,0.202
+2026-06-06,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,3686.03,4021,0.85,0.443
+2026-06-06,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,3074.96,1391,2.1,0.443
+2026-06-06,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,4139.24,811,4.5,0.443
+2026-06-06,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,5452.7,335,12.0,0.202
+2026-06-07,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,3451.56,3923,0.85,0.443
+2026-06-07,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,3645.18,1362,2.1,0.443
+2026-06-07,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,3800.05,779,4.5,0.443
+2026-06-07,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,4535.33,328,12.0,0.202
+2026-06-07,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,4011.2,4119,0.85,0.443
+2026-06-07,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,3523.42,1325,2.1,0.443
+2026-06-07,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,4169.93,814,4.5,0.443
+2026-06-07,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,4199.63,307,12.0,0.202
+2026-06-07,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,3863.45,4075,0.85,0.443
+2026-06-07,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,3143.81,1261,2.1,0.443
+2026-06-07,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,4378.06,826,4.5,0.443
+2026-06-07,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,5274.54,348,12.0,0.202
+2026-06-08,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,3241.16,3901,0.85,0.443
+2026-06-08,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,3080.26,1290,2.1,0.443
+2026-06-08,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,4733.58,861,4.5,0.443
+2026-06-08,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,4803.49,353,12.0,0.202
+2026-06-08,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,3861.5,3942,0.85,0.443
+2026-06-08,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,3203.1,1446,2.1,0.443
+2026-06-08,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,3972.46,770,4.5,0.443
+2026-06-08,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,4530.93,338,12.0,0.202
+2026-06-08,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,3523.86,4041,0.85,0.443
+2026-06-08,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,3500.5,1436,2.1,0.443
+2026-06-08,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,4100.07,789,4.5,0.443
+2026-06-08,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,5118.47,331,12.0,0.202
+2026-06-09,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,3347.05,3920,0.85,0.443
+2026-06-09,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,3303.28,1315,2.1,0.443
+2026-06-09,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,4830.19,860,4.5,0.443
+2026-06-09,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,4856.07,343,12.0,0.202
+2026-06-09,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,3824.1,4349,0.85,0.443
+2026-06-09,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,2753.1,1269,2.1,0.443
+2026-06-09,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,4163.58,751,4.5,0.443
+2026-06-09,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,4995.83,339,12.0,0.202
+2026-06-09,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,3801.65,4140,0.85,0.443
+2026-06-09,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,2826.26,1295,2.1,0.443
+2026-06-09,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,3827.48,797,4.5,0.443
+2026-06-09,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,4864.94,334,12.0,0.202
+2026-06-10,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,3600.85,4140,0.85,0.443
+2026-06-10,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,3150.89,1350,2.1,0.443
+2026-06-10,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,4409.85,792,4.5,0.443
+2026-06-10,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,4324.62,309,12.0,0.202
+2026-06-10,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,3523.06,3679,0.85,0.443
+2026-06-10,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,3176.22,1348,2.1,0.443
+2026-06-10,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,4179.31,855,4.5,0.443
+2026-06-10,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,5103.28,342,12.0,0.202
+2026-06-10,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,3654.07,4375,0.85,0.443
+2026-06-10,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,3414.2,1313,2.1,0.443
+2026-06-10,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,4205.43,735,4.5,0.443
+2026-06-10,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,4981.84,345,12.0,0.202
+2026-06-11,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,3575.63,4095,0.85,0.443
+2026-06-11,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,3352.03,1352,2.1,0.443
+2026-06-11,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,4732.62,820,4.5,0.443
+2026-06-11,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,4500.43,322,12.0,0.202
+2026-06-11,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,3652.54,4144,0.85,0.443
+2026-06-11,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,3169.28,1387,2.1,0.443
+2026-06-11,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,4218.42,814,4.5,0.443
+2026-06-11,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,4999.05,334,12.0,0.202
+2026-06-11,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,3312.75,3905,0.85,0.443
+2026-06-11,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,3090.32,1279,2.1,0.443
+2026-06-11,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,5007.15,905,4.5,0.443
+2026-06-11,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,5411.0,338,12.0,0.202
+2026-06-12,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,3234.24,3707,0.85,0.443
+2026-06-12,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,3007.18,1357,2.1,0.443
+2026-06-12,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,4154.84,899,4.5,0.443
+2026-06-12,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,5596.5,361,12.0,0.202
+2026-06-12,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,4131.17,4123,0.85,0.443
+2026-06-12,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,3600.64,1352,2.1,0.443
+2026-06-12,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,4589.07,793,4.5,0.443
+2026-06-12,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,5222.59,329,12.0,0.202
+2026-06-12,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,3565.56,4090,0.85,0.443
+2026-06-12,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,3000.32,1335,2.1,0.443
+2026-06-12,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,3965.4,794,4.5,0.443
+2026-06-12,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,5107.95,371,12.0,0.202
+2026-06-13,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,3384.1,3617,0.85,0.443
+2026-06-13,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,3274.79,1409,2.1,0.443
+2026-06-13,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,3977.79,751,4.5,0.443
+2026-06-13,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,4665.41,337,12.0,0.202
+2026-06-13,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,4078.14,4479,0.85,0.443
+2026-06-13,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,2811.72,1307,2.1,0.443
+2026-06-13,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,3820.88,758,4.5,0.443
+2026-06-13,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,4871.04,312,12.0,0.202
+2026-06-13,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,3457.74,3947,0.85,0.443
+2026-06-13,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,3702.09,1474,2.1,0.443
+2026-06-13,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,3913.35,779,4.5,0.443
+2026-06-13,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,5580.43,341,12.0,0.202
+2026-06-14,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,3623.55,4223,0.85,0.443
+2026-06-14,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,3300.68,1386,2.1,0.443
+2026-06-14,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,3647.12,766,4.5,0.443
+2026-06-14,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,5760.6,366,12.0,0.202
+2026-06-14,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,3632.91,4256,0.85,0.443
+2026-06-14,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,3286.4,1344,2.1,0.443
+2026-06-14,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,4698.51,861,4.5,0.443
+2026-06-14,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,4574.62,326,12.0,0.202
+2026-06-14,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,3640.5,3830,0.85,0.443
+2026-06-14,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,3251.7,1400,2.1,0.443
+2026-06-14,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,3740.81,770,4.5,0.443
+2026-06-14,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,4611.91,334,12.0,0.202
+2026-06-15,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,3333.0,3999,0.85,0.443
+2026-06-15,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,3390.92,1432,2.1,0.443
+2026-06-15,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,4148.09,839,4.5,0.443
+2026-06-15,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,5436.43,361,12.0,0.202
+2026-06-15,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,3749.93,4052,0.85,0.443
+2026-06-15,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,2769.25,1278,2.1,0.443
+2026-06-15,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,3874.83,749,4.5,0.443
+2026-06-15,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,5826.64,358,12.0,0.202
+2026-06-15,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,4059.11,4051,0.85,0.443
+2026-06-15,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,3240.97,1338,2.1,0.443
+2026-06-15,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,3962.1,784,4.5,0.443
+2026-06-15,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,4613.94,346,12.0,0.202
+2026-06-16,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,3382.09,4047,0.85,0.443
+2026-06-16,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,3154.94,1332,2.1,0.443
+2026-06-16,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,4338.23,835,4.5,0.443
+2026-06-16,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,4680.09,331,12.0,0.202
+2026-06-16,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,4277.36,4286,0.85,0.443
+2026-06-16,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,2869.9,1264,2.1,0.443
+2026-06-16,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,4301.38,799,4.5,0.443
+2026-06-16,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,5009.92,316,12.0,0.202
+2026-06-16,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,4125.47,4094,0.85,0.443
+2026-06-16,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,3066.37,1357,2.1,0.443
+2026-06-16,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,4178.91,764,4.5,0.443
+2026-06-16,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,4813.64,311,12.0,0.202
+2026-06-17,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,3584.32,3854,0.85,0.443
+2026-06-17,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,3019.2,1316,2.1,0.443
+2026-06-17,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,4007.78,751,4.5,0.443
+2026-06-17,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,5835.33,353,12.0,0.202
+2026-06-17,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,3573.25,4069,0.85,0.443
+2026-06-17,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,3166.82,1316,2.1,0.443
+2026-06-17,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,4692.8,837,4.5,0.443
+2026-06-17,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,4914.83,360,12.0,0.202
+2026-06-17,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,3571.99,4154,0.85,0.443
+2026-06-17,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,2930.33,1272,2.1,0.443
+2026-06-17,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,4182.54,782,4.5,0.443
+2026-06-17,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,5502.17,351,12.0,0.202
+2026-06-18,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,3761.3,3968,0.85,0.443
+2026-06-18,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,3568.94,1453,2.1,0.443
+2026-06-18,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,4495.07,845,4.5,0.443
+2026-06-18,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,4705.09,322,12.0,0.202
+2026-06-18,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,3608.7,3905,0.85,0.443
+2026-06-18,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,3794.47,1435,2.1,0.443
+2026-06-18,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,4046.31,792,4.5,0.443
+2026-06-18,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,6072.37,371,12.0,0.202
+2026-06-18,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,3591.68,4223,0.85,0.443
+2026-06-18,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,3058.64,1387,2.1,0.443
+2026-06-18,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,4247.77,861,4.5,0.443
+2026-06-18,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,4905.09,319,12.0,0.202
+2026-06-19,Vardiya 1 (07:00 - 15:00),Montaj Hattı A,Elektrik,3758.08,3992,0.85,0.443
+2026-06-19,Vardiya 1 (07:00 - 15:00),Kaynak Hattı B,Elektrik,3252.66,1336,2.1,0.443
+2026-06-19,Vardiya 1 (07:00 - 15:00),Pres Hattı C,Elektrik,4611.4,847,4.5,0.443
+2026-06-19,Vardiya 1 (07:00 - 15:00),Fırın / Isıl İşlem D,Doğal Gaz,4889.67,358,12.0,0.202
+2026-06-19,Vardiya 2 (15:00 - 23:00),Montaj Hattı A,Elektrik,3803.09,3910,0.85,0.443
+2026-06-19,Vardiya 2 (15:00 - 23:00),Kaynak Hattı B,Elektrik,3147.31,1368,2.1,0.443
+2026-06-19,Vardiya 2 (15:00 - 23:00),Pres Hattı C,Elektrik,4561.49,788,4.5,0.443
+2026-06-19,Vardiya 2 (15:00 - 23:00),Fırın / Isıl İşlem D,Doğal Gaz,4734.27,314,12.0,0.202
+2026-06-19,Vardiya 3 (23:00 - 07:00),Montaj Hattı A,Elektrik,4094.71,4267,0.85,0.443
+2026-06-19,Vardiya 3 (23:00 - 07:00),Kaynak Hattı B,Elektrik,3072.53,1223,2.1,0.443
+2026-06-19,Vardiya 3 (23:00 - 07:00),Pres Hattı C,Elektrik,4823.1,840,4.5,0.443
+2026-06-19,Vardiya 3 (23:00 - 07:00),Fırın / Isıl İşlem D,Doğal Gaz,4779.89,326,12.0,0.202
