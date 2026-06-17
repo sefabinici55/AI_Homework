@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Tipografi: Montserrat (başlık) + Inter (gövde) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Grafik kütüphanesi -->
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+  <style>
+    /* ---- VALEO Tasarım Sistemi ---- */
+    :root {
+      --primary:   #82E600; /* Canlı yeşil – vurgular */
+      --secondary: #1D2433; /* Antrasit – metin/başlık */
+      --tertiary:  #16445F; /* Petrol mavisi – yardımcı grafik */
+      --neutral:   #F1F3F9; /* Kart/sayfa fonu */
+      --white:     #FFFFFF;
+      --muted:     #6B7280;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--neutral);
+      color: var(--secondary);
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      height: 100vh;
+      overflow: hidden; /* No-scroll kuralı */
+    }
+
+    h1, h2, .kpi-value { font-family: 'Montserrat', sans-serif; }
+
+    /* ---- Header ---- */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 10px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-badge {
+      background: var(--secondary); color: var(--primary);
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      padding: 6px 12px; border-radius: 6px; letter-spacing: 1px;
+    }
+    header h1 { font-size: 18px; color: var(--secondary); }
+    .updated { font-size: 12px; color: var(--muted); }
+
+    /* ---- KPI kartları ---- */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    .kpi-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 14px 16px;
+      box-shadow: 0 1px 3px rgba(29,36,51,.08);
+      border-left: 4px solid var(--tertiary);
+    }
+    .kpi-card .kpi-label { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .kpi-card .kpi-value { font-size: 24px; font-weight: 700; color: var(--secondary); }
+    .kpi-card .kpi-unit  { font-size: 12px; color: var(--muted); font-weight: 500; margin-left: 4px; }
+    .kpi-card.accent { border-left-color: var(--primary); }
+
+    /* ---- Grafik gövdesi ---- */
+    .charts {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 14px;
+      flex: 1;
+      min-height: 0;
+    }
+    .panel {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 12px 16px;
+      box-shadow: 0 1px 3px rgba(29,36,51,.08);
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .panel h2 { font-size: 14px; margin-bottom: 8px; color: var(--secondary); }
+    .chart { flex: 1; min-height: 0; }
+
+    /* ---- Durum mesajları (Empty / Loading / Error) ---- */
+    .state {
+      display: flex; align-items: center; justify-content: center;
+      height: 100%; width: 100%;
+      color: var(--muted); font-size: 14px; text-align: center;
+    }
+    .state.error { color: #C0392B; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="brand">
+      <span class="brand-badge">VALEO</span>
+      <h1>Enerji &amp; Sürdürülebilirlik Panosu</h1>
+    </div>
+    <div class="updated" id="updated">Yükleniyor…</div>
+  </header>
+
+  <!-- KPI KARTLARI -->
+  <section class="kpi-row" id="kpiRow">
+    <div class="state" id="kpiState">KPI'lar yükleniyor…</div>
+  </section>
+
+  <!-- GRAFİK GÖVDESİ -->
+  <section class="charts">
+    <div class="panel">
+      <h2>Günlük Enerji Tüketim Trendi (Hat Bazlı, kWh)</h2>
+      <div class="chart" id="trendChart">
+        <div class="state" id="trendState">Grafik yükleniyor…</div>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>Hat Bazlı Toplam Tüketim (Pareto)</h2>
+      <div class="chart" id="hatChart">
+        <div class="state" id="hatState">Grafik yükleniyor…</div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // VALEO renk paleti (grafiklerde kullanılacak seri renkleri)
+    var PALETTE = ['#16445F', '#82E600', '#1D2433', '#5B9BD5', '#9AA7B5', '#C0392B'];
+
+    // Türkçe sayı biçimi: 1.250,50
+    function trNum(n, ondalik) {
+      return Number(n).toLocaleString('tr-TR', {
+        minimumFractionDigits: ondalik || 0,
+        maximumFractionDigits: ondalik || 0
+      });
+    }
+
+    google.charts.load('current', { packages: ['corechart', 'bar'] });
+    google.charts.setOnLoadCallback(veriYukle);
+
+    // Sunucudan (Code.gs) canlı veri çek
+    function veriYukle() {
+      google.script.run
+        .withSuccessHandler(panoyuCiz)
+        .withFailureHandler(hataGoster)
+        .getDashboardData();
+    }
+
+    function panoyuCiz(data) {
+      if (!data || !data.ok) {
+        return hataGoster({ message: (data && data.error) || 'Bilinmeyen hata' });
+      }
+      if (data.isEmpty) {
+        document.getElementById('updated').textContent = '';
+        bosDurum();
+        return;
+      }
+
+      document.getElementById('updated').textContent = 'Son güncelleme: ' + data.guncelleme;
+      kpiCiz(data.kpi);
+      trendCiz(data.trend);
+      hatCiz(data.hatBazli);
+    }
+
+    // ---- KPI kartları ----
+    function kpiCiz(k) {
+      var kartlar = [
+        { label: 'Toplam Enerji Tüketimi', value: trNum(k.toplamTuketim), unit: 'kWh', accent: true },
+        { label: 'Toplam CO₂ Salınımı',    value: trNum(k.toplamCo2, 1),  unit: 'ton' },
+        { label: 'Toplam Üretim',          value: trNum(k.toplamUretim),  unit: 'adet' },
+        { label: 'Birim Başı Tüketim',     value: trNum(k.birimBasiTuketim, 2), unit: 'kWh/birim' },
+        { label: 'Hedefe Göre Verimlilik', value: trNum(k.verimlilikOrani, 2),  unit: '(1,00 = hedef)' }
+      ];
+
+      var html = kartlar.map(function (c) {
+        return '<div class="kpi-card' + (c.accent ? ' accent' : '') + '">' +
+                 '<div class="kpi-label">' + c.label + '</div>' +
+                 '<div class="kpi-value">' + c.value +
+                   '<span class="kpi-unit">' + c.unit + '</span>' +
+                 '</div>' +
+               '</div>';
+      }).join('');
+
+      document.getElementById('kpiRow').innerHTML = html;
+    }
+
+    // ---- Çizgi grafik: günlük trend (hat bazlı) ----
+    function trendCiz(tablo) {
+      if (!tablo || tablo.length < 2) return tekliBos('trendChart');
+      var data = google.visualization.arrayToDataTable(tablo);
+      var chart = new google.visualization.LineChart(document.getElementById('trendChart'));
+      chart.draw(data, {
+        colors: PALETTE,
+        legend: { position: 'top', textStyle: { fontName: 'Inter', fontSize: 11 } },
+        chartArea: { left: 60, top: 40, right: 10, bottom: 40 },
+        hAxis: { textStyle: { fontName: 'Inter', fontSize: 10 } },
+        vAxis: { format: 'short', textStyle: { fontName: 'Inter', fontSize: 10 } },
+        fontName: 'Inter',
+        lineWidth: 2
+      });
+    }
+
+    // ---- Sütun grafik: hat bazlı toplam (Pareto) ----
+    function hatCiz(liste) {
+      if (!liste || !liste.length) return tekliBos('hatChart');
+      var tablo = [['Hat', 'Tüketim (kWh)', { role: 'style' }]];
+      liste.forEach(function (x, i) {
+        tablo.push([x.hat, x.tuketim, PALETTE[i % PALETTE.length]]);
+      });
+      var data = google.visualization.arrayToDataTable(tablo);
+      var chart = new google.visualization.BarChart(document.getElementById('hatChart'));
+      chart.draw(data, {
+        legend: { position: 'none' },
+        chartArea: { left: 120, top: 10, right: 20, bottom: 30 },
+        hAxis: { format: 'short', textStyle: { fontName: 'Inter', fontSize: 10 } },
+        vAxis: { textStyle: { fontName: 'Inter', fontSize: 11 } },
+        fontName: 'Inter'
+      });
+    }
+
+    // ---- Durumlar ----
+    function bosDurum() {
+      ['kpiRow', 'trendChart', 'hatChart'].forEach(function (id) {
+        document.getElementById(id).innerHTML = '<div class="state">Veri bulunamadı</div>';
+      });
+    }
+    function tekliBos(id) {
+      document.getElementById(id).innerHTML = '<div class="state">Veri bulunamadı</div>';
+    }
+    function hataGoster(err) {
+      document.getElementById('updated').textContent = '';
+      ['kpiRow', 'trendChart', 'hatChart'].forEach(function (id) {
+        document.getElementById(id).innerHTML =
+          '<div class="state error">Veri yüklenemedi: ' + (err && err.message ? err.message : '') + '</div>';
+      });
+    }
+  </script>
+</body>
+</html>

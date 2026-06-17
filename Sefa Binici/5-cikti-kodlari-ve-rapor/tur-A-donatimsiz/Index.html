@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tesis Enerji Tüketimi Paneli</title>
+
+  <!-- Grafik kütüphanesi: Chart.js (CDN üzerinden) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --accent: #38bdf8;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --good: #4ade80;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 24px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    header h1 { font-size: 22px; font-weight: 600; }
+    header .meta { color: var(--muted); font-size: 13px; }
+
+    /* KPI Kartları */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .kpi {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 20px;
+      border-left: 4px solid var(--accent);
+    }
+    .kpi .label { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+    .kpi .value { font-size: 28px; font-weight: 700; }
+    .kpi .unit { font-size: 14px; color: var(--muted); margin-left: 4px; }
+
+    /* Grafik alanları */
+    .charts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 860px) { .charts { grid-template-columns: 1fr; } }
+    .panel {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .panel h2 { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+
+    #status {
+      text-align: center;
+      padding: 40px;
+      color: var(--muted);
+    }
+    .error { color: #f87171; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>⚡ Tesis Enerji Tüketimi Paneli</h1>
+    <div class="meta" id="generatedAt">Yükleniyor…</div>
+  </header>
+
+  <div id="status">Veriler Google Sheets'ten çekiliyor…</div>
+
+  <main id="dashboard" style="display:none;">
+    <!-- Özet KPI kartları -->
+    <section class="kpi-grid">
+      <div class="kpi">
+        <div class="label">Toplam Tüketim</div>
+        <div class="value"><span id="kpiTotal">0</span><span class="unit">kWh</span></div>
+      </div>
+      <div class="kpi">
+        <div class="label">Hat Sayısı</div>
+        <div class="value" id="kpiLines">0</div>
+      </div>
+      <div class="kpi">
+        <div class="label">Hat Başına Ortalama</div>
+        <div class="value"><span id="kpiAvg">0</span><span class="unit">kWh</span></div>
+      </div>
+      <div class="kpi">
+        <div class="label">En Çok Tüketen Hat</div>
+        <div class="value" id="kpiTop" style="font-size:20px;">-</div>
+      </div>
+    </section>
+
+    <!-- Grafikler -->
+    <section class="charts">
+      <div class="panel">
+        <h2>Hat Bazlı Enerji Tüketimi</h2>
+        <canvas id="lineBarChart"></canvas>
+      </div>
+      <div class="panel">
+        <h2>Zamana Göre Tüketim Trendi</h2>
+        <canvas id="trendChart"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Sayfa yüklenince sunucudan veriyi iste.
+    document.addEventListener('DOMContentLoaded', function () {
+      google.script.run
+        .withSuccessHandler(renderDashboard)
+        .withFailureHandler(showError)
+        .getDashboardData();
+    });
+
+    function showError(err) {
+      var s = document.getElementById('status');
+      s.classList.add('error');
+      s.textContent = 'Hata: ' + (err && err.message ? err.message : err);
+    }
+
+    function renderDashboard(data) {
+      // KPI'ları doldur.
+      document.getElementById('kpiTotal').textContent = formatNum(data.kpis.totalConsumption);
+      document.getElementById('kpiLines').textContent = data.kpis.lineCount;
+      document.getElementById('kpiAvg').textContent   = formatNum(data.kpis.avgPerLine);
+      document.getElementById('kpiTop').textContent   =
+        data.kpis.topLine + ' (' + formatNum(data.kpis.topValue) + ' kWh)';
+      document.getElementById('generatedAt').textContent =
+        'Güncellenme: ' + data.generatedAt;
+
+      // Arayüzü göster.
+      document.getElementById('status').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+
+      drawLineBarChart(data.lineChart);
+      drawTrendChart(data.trendChart);
+    }
+
+    // Hat bazlı tüketim - çubuk grafik.
+    function drawLineBarChart(cfg) {
+      new Chart(document.getElementById('lineBarChart'), {
+        type: 'bar',
+        data: {
+          labels: cfg.labels,
+          datasets: [{
+            label: 'Tüketim (kWh)',
+            data: cfg.values,
+            backgroundColor: '#38bdf8',
+            borderRadius: 6
+          }]
+        },
+        options: baseOptions()
+      });
+    }
+
+    // Zaman trendi - çizgi grafik.
+    function drawTrendChart(cfg) {
+      new Chart(document.getElementById('trendChart'), {
+        type: 'line',
+        data: {
+          labels: cfg.labels,
+          datasets: [{
+            label: 'Tüketim (kWh)',
+            data: cfg.values,
+            borderColor: '#4ade80',
+            backgroundColor: 'rgba(74,222,128,0.15)',
+            fill: true,
+            tension: 0.3
+          }]
+        },
+        options: baseOptions()
+      });
+    }
+
+    // Tüm grafikler için ortak görsel ayarlar (koyu tema uyumu).
+    function baseOptions() {
+      return {
+        responsive: true,
+        plugins: { legend: { labels: { color: '#e2e8f0' } } },
+        scales: {
+          x: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148,163,184,0.1)' } },
+          y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(148,163,184,0.1)' } }
+        }
+      };
+    }
+
+    function formatNum(n) {
+      return Number(n).toLocaleString('tr-TR');
+    }
+  </script>
+</body>
+</html>
